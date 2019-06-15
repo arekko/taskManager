@@ -37,7 +37,11 @@ export interface CreateTaskErrorMessage {
 
 export interface LoginResponse {
   status: Status;
-  message?: LoginErrorMessage;
+  message?: LoginErrorMessage | LoginMessage;
+}
+
+export interface LoginMessage {
+  token: string;
 }
 
 export interface LoginErrorMessage {
