@@ -1,10 +1,10 @@
-import React from "react";
-import Button from "react-bootstrap/Button";
+import * as React from "react";
+import { Navigation } from "./navigation";
 
 const App: React.FC = () => {
   return (
     <div>
-      <Button>Hello</Button>
+      <Navigation />
     </div>
   );
 };
