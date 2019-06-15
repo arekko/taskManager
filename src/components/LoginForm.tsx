@@ -8,24 +8,19 @@ import * as yup from "yup";
 
 const schema = yup.object({
   username: yup.string().required(),
-  email: yup
-    .string()
-    .required()
-    .email(),
-  text: yup.string().required()
+  password: yup.string().required()
 });
 
 interface Props {}
 
-export const TaskForm: React.FC<Props> = () => {
+export const LoginForm: React.FC<Props> = () => {
   return (
     <Formik
       validationSchema={schema}
       onSubmit={console.log}
       initialValues={{
         username: "",
-        email: "",
-        text: ""
+        password: ""
       }}
     >
       {({
@@ -39,7 +34,7 @@ export const TaskForm: React.FC<Props> = () => {
       }: any) => (
         <Form noValidate onSubmit={handleSubmit}>
           <Form.Row className="justify-content-md-center">
-            <Form.Group as={Col} md="12" controlId="validationFormik01">
+            <Form.Group as={Col} controlId="validationFormik01">
               <InputGroup>
                 <Form.Control
                   type="text"
@@ -54,44 +49,29 @@ export const TaskForm: React.FC<Props> = () => {
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
-            <Form.Group as={Col} md="12" controlId="validationFormik02">
+          </Form.Row>
+          <Form.Row className="justify-content-md-center">
+            <Form.Group as={Col} controlId="validationFormik02">
               <InputGroup>
                 <Form.Control
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                  value={values.email}
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={values.password}
                   onChange={handleChange}
-                  isInvalid={!!errors.email}
+                  isInvalid={!!errors.password}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {errors.email}
+                  {errors.password}
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
           </Form.Row>
 
           <Form.Row className="justify-content-md-center">
-            <Form.Group as={Col} md="12" controlId="validationFormikUsername">
-              <InputGroup>
-                <Form.Control
-                  as={"textarea"}
-                  placeholder="Input your task ..."
-                  name="text"
-                  value={values.text}
-                  onChange={handleChange}
-                  isInvalid={!!errors.text}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.text}
-                </Form.Control.Feedback>
-              </InputGroup>
-            </Form.Group>
-          </Form.Row>
-          <Form.Row className="justify-content-md-center">
-            <Form.Group as={Col} md="12" controlId="validationFormikButton">
+            <Form.Group as={Col} controlId="validationFormikButton">
               <Button type="submit" block>
-                Create task
+                Login
               </Button>
             </Form.Group>
           </Form.Row>

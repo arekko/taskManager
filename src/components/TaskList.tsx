@@ -1,7 +1,6 @@
 import * as React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import Pagination from "react-bootstrap/Pagination";
-
 interface Props {}
 
 export const TaskList: React.FC<Props> = () => {
@@ -15,13 +14,13 @@ export const TaskList: React.FC<Props> = () => {
     );
   }
   return (
-    <div>
+    <>
       <ListGroup>
-        {[1, 2, 3, 4, 5, 6, 7].map((item: any) => (
-          <ListGroup.Item>{item}</ListGroup.Item>
+        {[1, 2, 3].map((item: any) => (
+          <ListGroup.Item className="mt-1">{item}</ListGroup.Item>
         ))}
       </ListGroup>
-      <Pagination>{items}</Pagination>
-    </div>
+      <Pagination className="mt-3">{items}</Pagination>
+    </>
   );
 };
