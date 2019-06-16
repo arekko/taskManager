@@ -11,13 +11,25 @@ const schema = yup.object({
   password: yup.string().required()
 });
 
-interface Props {}
+interface ILoginFormProps {
+  onSubmit: any;
+  valErrors: any;
+  login: any;
+  history: any;
+}
 
-export const LoginForm: React.FC<Props> = () => {
+export const LoginForm: React.FC<ILoginFormProps> = ({
+  onSubmit,
+  valErrors,
+  login,
+  history
+}) => {
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={console.log}
+      onSubmit={async (values, { setErrors }) => {
+        await login(values);
+      }}
       initialValues={{
         username: "",
         password: ""
@@ -42,7 +54,7 @@ export const LoginForm: React.FC<Props> = () => {
                   placeholder="Username"
                   value={values.username}
                   onChange={handleChange}
-                  isInvalid={!!errors.username}
+                  isInvalid={!!errors.password}
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.username}
@@ -59,10 +71,10 @@ export const LoginForm: React.FC<Props> = () => {
                   name="password"
                   value={values.password}
                   onChange={handleChange}
-                  isInvalid={!!errors.password}
+                  isInvalid={!!valErrors}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {errors.password}
+                  {valErrors && valErrors.password}
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
@@ -70,7 +82,7 @@ export const LoginForm: React.FC<Props> = () => {
 
           <Form.Row className="justify-content-md-center">
             <Form.Group as={Col} controlId="validationFormikButton">
-              <Button type="submit" block>
+              <Button type="submit" block variant="outline-primary">
                 Login
               </Button>
             </Form.Group>

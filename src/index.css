@@ -12,3 +12,23 @@
   font-size: 14px;
   color: #6b6b6b;
 }
+.task-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.task-status {
+  font-size: 13px;
+  color: #6b6b6b;
+  cursor: pointer;
+}
+.done {
+  color: #a5d6a7;
+}
+.unfinished {
+  color: #e57373;
+}
+.text-done {
+  text-decoration: line-through;
+}
