@@ -10,10 +10,10 @@ export const ListItem: React.FC<IListItemProps> = ({ item }) => {
   return (
     <ListGroup.Item className="mt-1">
       <div>
-        <span className="mr-2">{item.username}</span>
-        <span>{item.email}</span>
+        <span className="mr-2 username">{item.username}</span>
+        <span className="username">{item.email}</span>
       </div>
-      <h5 className="mt-3">{item.text}</h5>
+      <p className="mt-3">{item.text}</p>
     </ListGroup.Item>
   );
 };

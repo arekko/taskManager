@@ -10,9 +10,9 @@ export const Home: React.FC<Props> = ({}) => {
   return (
     <Row className="justify-content-md-center mt-3">
       <Col md="6">
-        <h4 className="mb-3">Create new task</h4>
+        <h5 className="mb-3">Create new task</h5>
         <TaskFormContainer />
-        <h4 className="mb-3">Tasks</h4>
+        <h5 className="mb-3">Tasks</h5>
         <TaskListContainer />
       </Col>
     </Row>

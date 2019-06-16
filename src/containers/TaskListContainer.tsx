@@ -4,11 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import { TaskList } from "../components/TaskList";
 import { withTaskService } from "../hocs";
-import {
-  loadTasks,
-  setPage,
-  sortTasks
-} from "../redux-store/actions/taskActions";
+import { loadTasks, setPage, sortTasks } from "../redux-store/actions/taskActions";
 import { Task } from "../types";
 
 interface ITaskListContainerProps {
@@ -45,7 +41,13 @@ export const HC: React.FC<ITaskListContainerProps> = ({
   };
 
   return loading || !tasks ? (
-    <Spinner animation="border" />
+    <div className="spinner">
+      <Spinner
+        className="justify-content"
+        animation="border"
+        variant="primary"
+      />
+    </div>
   ) : (
     <TaskList
       data={tasks}

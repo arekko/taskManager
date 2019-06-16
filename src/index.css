@@ -3,3 +3,12 @@
   border: 2px solid "#aed581";
   width: 20px;
 }
+.spinner {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+}
+.username {
+  font-size: 14px;
+  color: #6b6b6b;
+}
