@@ -27,7 +27,7 @@ export const TaskList: React.FC<Props> = ({
   return (
     <>
       <SortButton handleSort={handleSort} />
-      <ListGroup>
+      <ListGroup className="mb-3">
         {data.map((item: Task) => (
           <ListItem item={item} key={item.id} />
         ))}
@@ -39,6 +39,9 @@ export const TaskList: React.FC<Props> = ({
         totalItemsCount={pageCounter(total)}
         pageRangeDisplayed={5}
         onChange={handlePageChange}
+        itemClass="page-item"
+        linkClass="page-link"
+        hideNavigation={true}
       />
 
       {/* <Pagination className="mt-3">{items}</Pagination> */}

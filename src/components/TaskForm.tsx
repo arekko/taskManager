@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
+import Spinner from "react-bootstrap/Spinner";
 import * as yup from "yup";
 
 const schema = yup.object({
@@ -15,13 +16,21 @@ const schema = yup.object({
   text: yup.string().required()
 });
 
-interface Props {}
+interface Props {
+  onSubmit: (values: any, { resetForm }: any) => void;
+  uploading: boolean;
+  uploadError: any;
+}
 
-export const TaskForm: React.FC<Props> = () => {
+export const TaskForm: React.FC<Props> = ({
+  onSubmit,
+  uploadError,
+  uploading
+}) => {
   return (
     <Formik
       validationSchema={schema}
-      onSubmit={console.log}
+      onSubmit={onSubmit}
       initialValues={{
         username: "",
         email: "",
@@ -90,9 +99,21 @@ export const TaskForm: React.FC<Props> = () => {
           </Form.Row>
           <Form.Row className="justify-content-md-center">
             <Form.Group as={Col} md="12" controlId="validationFormikButton">
-              <Button type="submit" block>
-                Create task
-              </Button>
+              {uploading ? (
+                <Button disabled block variant="outline-primary">
+                  <Spinner
+                    as="span"
+                    animation="border"
+                    size="sm"
+                    role="status"
+                    aria-hidden="true"
+                  />
+                </Button>
+              ) : (
+                <Button type="submit" block variant="outline-primary">
+                  Create task
+                </Button>
+              )}
             </Form.Group>
           </Form.Row>
         </Form>

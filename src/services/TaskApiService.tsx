@@ -7,7 +7,7 @@ import {
 } from "./types";
 
 export class TaskApiService {
-  private baseUrl: string = `https://uxcandy.com/~shapoval/test-task-backend/v2/?developer=andreivas`;
+  private baseUrl: string = `https://uxcandy.com/~shapoval/test-task-backend/v2`;
   private developer: string = "andreivas";
 
   /**
@@ -51,14 +51,15 @@ export class TaskApiService {
     data.append("username", username);
     data.append("email", email);
     data.append("text", text);
+    console.log(data);
 
     return await axios({
       method: "post",
-      url: `${this.baseUrl}/create`,
+      baseURL: `${this.baseUrl}/create`,
       data: data,
       params: { developer: this.developer },
       headers: {
-        "content-type": `multipart/form-data`
+        "content-type": "multipart/form-data"
       }
     });
   }

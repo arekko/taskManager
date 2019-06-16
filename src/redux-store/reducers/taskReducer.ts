@@ -1,3 +1,4 @@
+import { uploadTaskFailure } from "../actions/taskActions";
 import { createReducer, updateObject } from "./reducerUtilities";
 
 const initialState = {
@@ -7,7 +8,9 @@ const initialState = {
   error: undefined,
   totalTasks: undefined,
   sortField: "username",
-  sortDirection: "asc"
+  sortDirection: "asc",
+  uploading: false,
+  uploadError: undefined
 };
 
 const fetchTasksRequest = (state: any) =>
@@ -38,10 +41,25 @@ const sortTasks = (state: any, { payload }: any) =>
     sortField: payload
   });
 
+// Uploading
+
+const uploadTaskRequest = (state: any) =>
+  updateObject(state, {
+    uploading: true
+  });
+
+const uploadTaskSuccess = (state: any, { payload }: any) =>
+  updateObject(state, {
+    uploading: false
+  });
+
 export default createReducer(initialState, {
   FETCH_TASKS_REQUEST: fetchTasksRequest,
   FETCH_TASKS_SUCCESS: fetchTasksSuccess,
   FETCH_TASKS_FAILURE: fetchTasksFailure,
   SET_PAGE: setPage,
-  SORT_TASKS: sortTasks
+  SORT_TASKS: sortTasks,
+  UPLOAD_TASK_REQUEST: uploadTaskRequest,
+  UPLOAD_TASK_SUCCESS: uploadTaskSuccess,
+  UPLOAD_TASK_FAILURE: uploadTaskFailure
 });

@@ -7,8 +7,8 @@ interface Props {
 
 export const SortButton: React.FC<Props> = ({ handleSort }) => {
   return (
-    <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
+    <Dropdown className="mb-3">
+      <Dropdown.Toggle variant="light" id="dropdown-basic">
         Sort by
       </Dropdown.Toggle>
 

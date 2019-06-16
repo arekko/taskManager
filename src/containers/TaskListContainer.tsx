@@ -11,7 +11,7 @@ import {
 } from "../redux-store/actions/taskActions";
 import { Task } from "../types";
 
-interface IHomeProps {
+interface ITaskListContainerProps {
   loadTasks: () => void;
   loading: boolean;
   tasks: Task[];
@@ -21,7 +21,7 @@ interface IHomeProps {
   sortTasks: any;
 }
 
-export const HC: React.FC<IHomeProps> = ({
+export const HC: React.FC<ITaskListContainerProps> = ({
   loadTasks,
   loading,
   tasks,
