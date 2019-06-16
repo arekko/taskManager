@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
+import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
-import { Home } from "../components/Home";
+import { TaskList } from "../components/TaskList";
 import { withTaskService } from "../hocs";
 import { loadTasks, setPage } from "../redux-store/actions/taskActions";
 import { Task } from "../types";
@@ -12,7 +13,7 @@ interface IHomeProps {
   tasks: Task[];
   total: number;
   page: number;
-  setPage: any
+  setPage: any;
 }
 
 export const HC: React.FC<IHomeProps> = ({
@@ -29,7 +30,21 @@ export const HC: React.FC<IHomeProps> = ({
 
   console.log(tasks, loading);
 
-  return <Home data={tasks} loading={loading} total={total} page={page} setPage={setPage} />;
+  const handelPageChange = (pageNumber: number) => {
+    setPage(pageNumber);
+    loadTasks();
+  };
+
+  return loading || !tasks ? (
+    <Spinner animation="border" />
+  ) : (
+    <TaskList
+      data={tasks}
+      page={page}
+      total={total}
+      handlePageChange={handelPageChange}
+    />
+  );
 };
 
 const mapStateToProps = ({ task }: any) => ({
@@ -48,7 +63,7 @@ const mapDispatchToProps = (dispatch: any, { taskService }: any) =>
     dispatch
   );
 
-export const HomeContainer = compose(
+export const TaskListContainer = compose(
   withTaskService(),
   connect(
     mapStateToProps,
