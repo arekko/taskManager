@@ -4,7 +4,11 @@ import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import { TaskList } from "../components/TaskList";
 import { withTaskService } from "../hocs";
-import { loadTasks, setPage } from "../redux-store/actions/taskActions";
+import {
+  loadTasks,
+  setPage,
+  sortTasks
+} from "../redux-store/actions/taskActions";
 import { Task } from "../types";
 
 interface IHomeProps {
@@ -14,6 +18,7 @@ interface IHomeProps {
   total: number;
   page: number;
   setPage: any;
+  sortTasks: any;
 }
 
 export const HC: React.FC<IHomeProps> = ({
@@ -22,16 +27,20 @@ export const HC: React.FC<IHomeProps> = ({
   tasks,
   total,
   page,
-  setPage
+  setPage,
+  sortTasks
 }) => {
   useEffect(() => {
     loadTasks();
   }, []);
 
-  console.log(tasks, loading);
-
-  const handelPageChange = (pageNumber: number) => {
+  const handlePageChange = (pageNumber: number) => {
     setPage(pageNumber);
+    loadTasks();
+  };
+
+  const handleSort = (criteria: string) => {
+    sortTasks(criteria);
     loadTasks();
   };
 
@@ -42,7 +51,8 @@ export const HC: React.FC<IHomeProps> = ({
       data={tasks}
       page={page}
       total={total}
-      handlePageChange={handelPageChange}
+      handlePageChange={handlePageChange}
+      handleSort={handleSort}
     />
   );
 };
@@ -58,7 +68,8 @@ const mapDispatchToProps = (dispatch: any, { taskService }: any) =>
   bindActionCreators(
     {
       loadTasks: loadTasks(taskService),
-      setPage
+      setPage,
+      sortTasks
     },
     dispatch
   );

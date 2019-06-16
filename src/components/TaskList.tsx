@@ -5,19 +5,28 @@ import Pagination from "react-js-pagination";
 import { Task } from "../types";
 import { pageCounter } from "../utils/pageCounter";
 import { ListItem } from "./ListItem";
+import { SortButton } from "./SortButton";
 
 interface Props {
   data: Task[];
   total: number;
   page: number;
   handlePageChange: any;
+  handleSort: any;
 }
 
-export const TaskList: React.FC<Props> = ({ data, total, page, handlePageChange }) => {
+export const TaskList: React.FC<Props> = ({
+  data,
+  total,
+  page,
+  handlePageChange,
+  handleSort
+}) => {
   // const handlePageChange = (pageNumber: number) => setPage(pageNumber);
 
   return (
     <>
+      <SortButton handleSort={handleSort} />
       <ListGroup>
         {data.map((item: Task) => (
           <ListItem item={item} key={item.id} />

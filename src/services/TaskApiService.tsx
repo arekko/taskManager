@@ -20,13 +20,13 @@ export class TaskApiService {
   async getTasks({ page, sortField, sortDirection }: GetTasksParams) {
     let params: {
       page: number;
-      sort_filed?: string;
+      sort_field?: string;
       sort_direction?: string;
       developer: string;
     } = { page, developer: this.developer };
 
     if (sortField) {
-      params.sort_filed = sortField;
+      params.sort_field = sortField;
     }
     if (sortDirection) {
       params.sort_direction = sortDirection;

@@ -4,7 +4,7 @@ export interface GetTasksParams {
   sortDirection?: SortDirection;
 }
 
-type SortField = "id" | "username" | "email" | "status";
+export type SortField = "id" | "username" | "email" | "status";
 type SortDirection = "asc" | "desc";
 
 export interface CreateTaskParams {

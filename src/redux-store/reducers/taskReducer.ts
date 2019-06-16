@@ -33,9 +33,15 @@ const setPage = (state: any, { payload }: any) =>
     page: payload
   });
 
+const sortTasks = (state: any, { payload }: any) =>
+  updateObject(state, {
+    sortField: payload
+  });
+
 export default createReducer(initialState, {
   FETCH_TASKS_REQUEST: fetchTasksRequest,
   FETCH_TASKS_SUCCESS: fetchTasksSuccess,
   FETCH_TASKS_FAILURE: fetchTasksFailure,
-  SET_PAGE: setPage
+  SET_PAGE: setPage,
+  SORT_TASKS: sortTasks
 });

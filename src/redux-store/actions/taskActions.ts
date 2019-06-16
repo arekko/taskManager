@@ -1,9 +1,11 @@
+import { SortField } from "../../services/types";
 import { TaskApiService } from "./../../services/TaskApiService";
 import {
   FETCH_TASKS_FAILURE,
   FETCH_TASKS_REQUEST,
   FETCH_TASKS_SUCCESS,
-  SET_PAGE
+  SET_PAGE,
+  SORT_TASKS
 } from "./../constants";
 
 export const taskRequest = () => ({
@@ -21,6 +23,11 @@ export const taskSuccess = (data: any) => ({
 export const taskFailure = (error: any) => ({
   type: FETCH_TASKS_FAILURE,
   payload: error
+});
+
+export const sortTasks = (criteria: SortField) => ({
+  type: SORT_TASKS,
+  payload: criteria
 });
 
 export const loadTasks = (taskApiService: TaskApiService) => () => (
