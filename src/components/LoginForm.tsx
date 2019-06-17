@@ -71,10 +71,13 @@ export const LoginForm: React.FC<ILoginFormProps> = ({
                   name="password"
                   value={values.password}
                   onChange={handleChange}
-                  isInvalid={!!valErrors}
+                  isInvalid={!!valErrors || !!errors.password}
                 />
                 <Form.Control.Feedback type="invalid">
                   {valErrors && valErrors.password}
+                </Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  {errors.password && errors.password}
                 </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
