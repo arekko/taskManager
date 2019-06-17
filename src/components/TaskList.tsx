@@ -13,6 +13,7 @@ interface Props {
   page: number;
   handlePageChange: any;
   handleSort: any;
+  editStatus: any
 }
 
 export const TaskList: React.FC<Props> = ({
@@ -20,7 +21,8 @@ export const TaskList: React.FC<Props> = ({
   total,
   page,
   handlePageChange,
-  handleSort
+  handleSort,
+  editStatus
 }) => {
   // const handlePageChange = (pageNumber: number) => setPage(pageNumber);
 
@@ -29,7 +31,7 @@ export const TaskList: React.FC<Props> = ({
       <SortButton handleSort={handleSort} />
       <ListGroup className="mb-3">
         {data.map((item: Task) => (
-          <ListItem item={item} key={item.id} />
+          <ListItem item={item} key={item.id} editStatus={editStatus}/>
         ))}
       </ListGroup>
 

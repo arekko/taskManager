@@ -96,10 +96,11 @@ export class TaskApiService {
    * @returns
    * @memberof TaskApiService
    */
-  async edit({ id, text, status }: EditParams) {
+  async edit({ id, status, token }: EditParams) {
     const data = new FormData();
-    data.append("text", text);
-    data.append("status", status.toString()); //TODO: checkit
+    // data.append("text", text);
+    data.append("status", `${status}`); //TODO: checkit
+    data.append("token", token); //TODO: checkit
 
     return await axios({
       method: "post",

@@ -54,7 +54,7 @@ export const LoginForm: React.FC<ILoginFormProps> = ({
                   placeholder="Username"
                   value={values.username}
                   onChange={handleChange}
-                  isInvalid={!!errors.password}
+                  isInvalid={!!errors.username}
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.username}

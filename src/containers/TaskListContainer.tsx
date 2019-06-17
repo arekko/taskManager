@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { connect } from "react-redux";
+import { RouteComponentProps } from "react-router-dom";
 import { bindActionCreators, compose } from "redux";
 import { TaskList } from "../components/TaskList";
 import { withTaskService } from "../hocs";
-import { loadTasks, setPage, sortTasks } from "../redux-store/actions/taskActions";
+import {
+  editStatus,
+  loadTasks,
+  setPage,
+  sortTasks
+} from "../redux-store/actions/taskActions";
 import { Task } from "../types";
 
-interface ITaskListContainerProps {
+interface ITaskListContainerProps extends RouteComponentProps {
   loadTasks: () => void;
   loading: boolean;
   tasks: Task[];
@@ -15,6 +21,8 @@ interface ITaskListContainerProps {
   page: number;
   setPage: any;
   sortTasks: any;
+  editStatus: any;
+  user: any;
 }
 
 export const HC: React.FC<ITaskListContainerProps> = ({
@@ -24,7 +32,10 @@ export const HC: React.FC<ITaskListContainerProps> = ({
   total,
   page,
   setPage,
-  sortTasks
+  sortTasks,
+  editStatus,
+  user,
+  history
 }) => {
   useEffect(() => {
     loadTasks();
@@ -38,6 +49,16 @@ export const HC: React.FC<ITaskListContainerProps> = ({
   const handleSort = (criteria: string) => {
     sortTasks(criteria);
     loadTasks();
+  };
+
+  const handleStatus = (id: number, status: number) => {
+    if (user) {
+      editStatus({ id, status });
+      return;
+    }
+    history.push("/login");
+
+    // loadTasks();
   };
 
   return loading || !tasks ? (
@@ -55,21 +76,24 @@ export const HC: React.FC<ITaskListContainerProps> = ({
       total={total}
       handlePageChange={handlePageChange}
       handleSort={handleSort}
+      editStatus={handleStatus}
     />
   );
 };
 
-const mapStateToProps = ({ task }: any) => ({
+const mapStateToProps = ({ task, user }: any) => ({
   tasks: task.tasks,
   loading: task.loading,
   page: task.page,
-  total: task.totalTasks
+  total: task.totalTasks,
+  user: user.token
 });
 
 const mapDispatchToProps = (dispatch: any, { taskService }: any) =>
   bindActionCreators(
     {
       loadTasks: loadTasks(taskService),
+      editStatus: editStatus(taskService),
       setPage,
       sortTasks
     },

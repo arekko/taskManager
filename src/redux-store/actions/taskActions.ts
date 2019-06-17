@@ -1,6 +1,7 @@
 import { SortField } from "../../services/types";
 import { TaskApiService } from "./../../services/TaskApiService";
 import {
+  EDIT_TASK_SUCCESS,
   FETCH_TASKS_FAILURE,
   FETCH_TASKS_REQUEST,
   FETCH_TASKS_SUCCESS,
@@ -86,5 +87,27 @@ export const uploadTask = (taskApiService: TaskApiService) => ({
     console.log(data);
 
     dispatch(uploadTaskSuccess(data.data));
+  });
+};
+
+export const editTaskSuccess = (newTask: any) => ({
+  type: EDIT_TASK_SUCCESS,
+  payload: newTask
+});
+
+export const editStatus = (taskApiService: TaskApiService) => ({
+  id,
+  status
+}: {
+  id: number;
+  status: number;
+}) => (dispatch: any, getState: any) => {
+  const {
+    user: { token }
+  } = getState();
+  dispatch(editTaskSuccess({ id, status }));
+  taskApiService.edit({ id, status, token }).then((data: any) => {
+    console.log(data);
+    // dispatch(loadTasks(taskApiService)());
   });
 };

@@ -4,9 +4,12 @@ import { Task } from "../types";
 
 interface IListItemProps {
   item: Task;
+  editStatus: any;
 }
 
-export const ListItem: React.FC<IListItemProps> = ({ item }) => {
+export const ListItem: React.FC<IListItemProps> = ({ item, editStatus }) => {
+
+
   return (
     <ListGroup.Item className="mt-1">
       <div className="task-item">
@@ -16,11 +19,9 @@ export const ListItem: React.FC<IListItemProps> = ({ item }) => {
         </div>
 
         <span
-          onClick={() => console.log(item.id)}
+          onClick={() => editStatus(item.id, item.status === 0 ? 10 : 0)}
           className={
-            item.status === 0
-              ? "task-status unfinished"
-              : "task-status unfinished"
+            item.status === 0 ? "task-status unfinished" : "task-status done"
           }
         >
           {item.status === 0 ? "Unfinished" : "Done"}

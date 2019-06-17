@@ -53,6 +53,27 @@ const uploadTaskSuccess = (state: any, { payload }: any) =>
     uploading: false
   });
 
+// Edit
+
+const edittask = (state: any, { payload }: any) => {
+  console.log(state);
+
+  const itemIndex = state.tasks.findIndex(({ id }: any) => id === payload.id);
+  const item = state.tasks[itemIndex];
+
+  const newItem = {
+    ...item,
+    status: payload.status
+  };
+  return updateObject(state, {
+    tasks: [
+      ...state.tasks.slice(0, itemIndex),
+      newItem,
+      ...state.tasks.slice(itemIndex + 1)
+    ]
+  });
+};
+
 export default createReducer(initialState, {
   FETCH_TASKS_REQUEST: fetchTasksRequest,
   FETCH_TASKS_SUCCESS: fetchTasksSuccess,
@@ -61,5 +82,6 @@ export default createReducer(initialState, {
   SORT_TASKS: sortTasks,
   UPLOAD_TASK_REQUEST: uploadTaskRequest,
   UPLOAD_TASK_SUCCESS: uploadTaskSuccess,
-  UPLOAD_TASK_FAILURE: uploadTaskFailure
+  UPLOAD_TASK_FAILURE: uploadTaskFailure,
+  EDIT_TASK_SUCCESS: edittask
 });

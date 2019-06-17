@@ -20,6 +20,6 @@ export interface LoginParams {
 
 export interface EditParams {
   id: number;
-  text: string;
   status: number;
+  token: any
 }
